@@ -1,0 +1,41 @@
+﻿@model List<ECommerce.DTOs.Product.ProductStockDTO>
+@{
+    ViewBag.Title = "Manage Product Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Product Stock</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-bordered mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>Product Name</th>
+            <th>Current Stock</th>
+            <th>Update Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.CurrentStock</td>
+                <td>
+                    @using (Html.BeginForm("UpdateStock", "Admin"))
+                    {
+                        @Html.Hidden("id", product.Id)
+                        <div class="input-group">
+                            <input type="number" name="newStock" class="form-control" min="0" required />
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

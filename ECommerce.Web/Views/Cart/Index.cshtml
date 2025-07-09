@@ -1,0 +1,59 @@
+﻿@model List<ECommerce.Web.Models.CartItem>
+@{
+    ViewBag.Title = "Shopping Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2>Your Shopping Cart</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Your cart is empty.</div>
+    }
+    else
+    {
+        <form method="post" action="@Url.Action("UpdateQuantity", "Cart")">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.ImageUrl" width="60" />
+                                <strong>@item.Name</strong>
+                            </td>
+                            <td>₹@item.Price</td>
+                            <td>
+                                <form action="@Url.Action("UpdateQuantity", "Cart")" method="post">
+                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <input type="number" name="quantity" value="@item.Quantity" class="form-control" min="1" />
+                                    <button type="submit" class="btn btn-sm btn-warning mt-1">Update</button>
+                                </form>
+                            </td>
+                            <td>₹@item.Total</td>
+                            <td>
+                                <a href="@Url.Action("Remove", "Cart", new { productId = item.ProductId })" class="btn btn-danger btn-sm">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <h4>Total: ₹@Model.Sum(i => i.Total)</h4>
+                <a href="@Url.Action("Clear", "Cart")" class="btn btn-secondary">Clear Cart</a>
+                <a href="@Url.Action("Checkout", "Order")" class="btn btn-success">Proceed to Checkout</a>
+            </div>
+        </form>
+    }
+</div>

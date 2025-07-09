@@ -1,0 +1,42 @@
+﻿@model ECommerce.DTOs.Admin.DashboardStatsDTO
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-4">
+    <h2>Admin Dashboard</h2>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Total Users</div>
+                <div class="card-body">
+                    <h4 class="card-title">@Model.TotalUsers</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body">
+                    <h4 class="card-title">@Model.TotalOrders</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Total Revenue</div>
+                <div class="card-body">
+                    <h4 class="card-title">$@Model.TotalRevenue</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Total Products</div>
+                <div class="card-body">
+                    <h4 class="card-title">@Model.TotalProducts</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model List<ECommerce.DTOs.Cart.CartItemDTO>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2>Checkout</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>₹@item.Price</td>
+                    <td>₹@(item.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="text-right">
+        <strong>Total: ₹@Model.Sum(i => i.Price * i.Quantity)</strong>
+    </p>
+
+    @using (Html.BeginForm("PlaceOrder", "Cart", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-success">Place Order</button>
+    }
+</div>

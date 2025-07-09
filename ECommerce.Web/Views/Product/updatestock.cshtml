@@ -1,0 +1,26 @@
+﻿@model ECommerce.DTOs.Product.ProductStockUpdateDTO
+
+@{
+    ViewBag.Title = "Update Stock";
+}
+
+<h2>Update Product Stock</h2>
+
+<div class="card mt-3">
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+           <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label class="form-label">Quantity</label>
+                @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Quantity)
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="@Url.Action("Index", "Product")" class="btn btn-secondary">Cancel</a>
+        }
+    </div>
+</div>

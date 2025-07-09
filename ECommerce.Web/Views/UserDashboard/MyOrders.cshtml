@@ -1,0 +1,51 @@
+﻿@model List<ECommerce.DTOs.Product.ProductDTO>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Welcome, @Session["Username"]!</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">My Orders</h5>
+                    <a class="btn btn-light" href="@Url.Action("MyOrders","UserDashboard")">
+                        View My Orders
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">My Profile</h5>
+                    <a class="btn btn-light" href="@Url.Action("Profile","Account")">
+                        View Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>All Products</h3>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>@product.Name</h5>
+                        <p>Price: ₹@product.Price</p>
+                        <p>@product.Description</p>
+                        <a href="@Url.Action("AddToCart","Cart",new { id = product.Id })"
+                           class="btn btn-primary">
+                            Add to Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

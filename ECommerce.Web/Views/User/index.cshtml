@@ -1,0 +1,36 @@
+﻿@model List<ECommerce.DTOs.User.UserDTO>
+@{
+    ViewBag.Title = "All Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">User List</h2>
+<div class="container mt-4">
+    <h2>User List</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" href="@Url.Action("Edit", "User", new { id = user.Id })">Edit</a>
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "User", new { id = user.Id })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

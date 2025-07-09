@@ -1,0 +1,17 @@
+﻿@model ECommerce.DTOs.Admin.AdminProfileDTO
+
+@{
+    ViewBag.Title = "Admin Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Admin Profile</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Name:</strong> @Model.Name</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Username:</strong> @Model.Username</p>
+        <p><strong>Role:</strong> @Model.Role</p>
+    </div>
+</div>

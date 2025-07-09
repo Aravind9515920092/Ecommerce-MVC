@@ -1,0 +1,36 @@
+﻿@model ECommerce.DTOs.Order.OrderDetailDTO
+
+@{
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2>Order #@Model.OrderId</h2>
+    <p><strong>Customer:</strong> @Model.CustomerName</p>
+    <p><strong>Address:</strong> @Model.Address</p>
+    <p><strong>Status:</strong> @Model.Status</p>
+
+    <h4 class="mt-4">Items</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>₹@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>₹@(item.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

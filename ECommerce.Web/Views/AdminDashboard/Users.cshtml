@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ECommerce.DTOs.Admin.UserAdminDTO>
+@{
+    ViewBag.Title = "Manage Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-4">
+    <h2>Manage Users</h2>
+    <table class="table table-bordered mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@(user.IsActive ? "Active" : "Inactive")</td>
+                    <td>
+                        @if (user.IsActive)
+                        {
+                            using (Html.BeginForm("DeactivateUser", "AdminDashboard", new { id = user.Id }, FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-danger btn-sm">Deactivate</button>
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("ActivateUser", "AdminDashboard", new { id = user.Id }, FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-success btn-sm">Activate</button>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

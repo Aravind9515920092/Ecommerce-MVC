@@ -1,0 +1,30 @@
+﻿
+@model ECommerce.DTOs.Checkout.PaymentDTO
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2>💳 Payment Information</h2>
+
+    @using (Html.BeginForm("ConfirmOrder", "Cart", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.CardNumber)
+            @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Expiry)
+            @Html.TextBoxFor(m => m.Expiry, new { @class = "form-control", required = "required", placeholder = "MM/YY" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CVV)
+            @Html.PasswordFor(m => m.CVV, new { @class = "form-control", required = "required" })
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Pay & Place Order</button>
+    }
+</div>

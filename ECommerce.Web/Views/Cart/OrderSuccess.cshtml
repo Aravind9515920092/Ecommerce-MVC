@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Order Placed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5 text-center">
+    <h2 class="text-success">🎉 Order Placed Successfully!</h2>
+    <p>Your order has been confirmed.</p>
+    <a href="/Dashboard/UserDashboard" class="btn btn-primary mt-3">Continue Shopping</a>
+</div>
+@section Scripts {
+    <script>
+        toastr.success("Order placed successfully!");
+    </script>
+}

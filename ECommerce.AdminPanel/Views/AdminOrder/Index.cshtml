@@ -1,0 +1,32 @@
+﻿@model List<ECommerce.DTOs.Order.OrderDTO>
+
+@{
+    ViewBag.Title = "All Orders - Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>All Orders (Admin)</h2>
+    <hr />
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.CustomerName</td>
+                    <td>@order.OrderDate.ToShortDateString()</td>
+                    <td>₹ @order.TotalAmount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,22 @@
+﻿@model ECommerce.DTOs.Product.ProductDTO
+@{
+    ViewBag.Title = "Product Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.ImageUrl" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Name</h2>
+            <p>@Model.Description</p>
+            <h4>Price: ₹@Model.Price</h4>
+            <form method="post" action="@Url.Action("AddToCart", "Cart")">
+                <input type="hidden" name="productId" value="@Model.ProductId" />
+                <input type="number" name="quantity" value="1" class="form-control mb-3" />
+                <button type="submit" class="btn btn-success">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>

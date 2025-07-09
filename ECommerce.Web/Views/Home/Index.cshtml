@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ECommerce.DTOs.Product.ProductDTO>
+    @{
+        ViewBag.Title = "Home";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <div class="container mt-5">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">₹@product.Price</p>
+                            <a href="@Url.Action("Details", "Home", new { id = product.ProductId })" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

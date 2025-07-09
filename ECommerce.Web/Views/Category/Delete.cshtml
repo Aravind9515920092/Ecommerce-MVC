@@ -1,0 +1,20 @@
+﻿
+@model ECommerce.DTOs.Category.CategoryDTO
+
+@{
+    ViewBag.Title = "Delete Category";
+}
+
+<h2>Are you sure you want to delete this category?</h2>
+
+<div class="alert alert-danger">
+    <strong>@Model.Name</strong>
+</div>
+
+@using (Html.BeginForm("DeleteConfirmed", "Category", new { id = Model.Id }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+}

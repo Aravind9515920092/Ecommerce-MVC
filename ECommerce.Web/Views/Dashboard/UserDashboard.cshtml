@@ -1,0 +1,47 @@
+﻿@model List<ECommerce.DTOs.Product.ProductDTO>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var categories = ViewBag.Categories as List<ECommerce.DTOs.Category.CategoryDTO>;
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Welcome, @Session["Username"]!</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <form method="get" action="/Dashboard/UserDashboard" class="form-inline">
+            <select name="categoryId" class="form-control mr-2">
+                <option value="">-- All Categories --</option>
+                @foreach (var cat in categories)
+                {
+                    <option value="@cat.CategoryId">@cat.Name</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <div>
+            <a href="/Order/MyOrders" class="btn btn-info mr-2">🛒 My Orders</a>
+            <a href="/Account/MyProfile" class="btn btn-warning">👤 My Profile</a>
+        </div>
+    </div>
+
+    <h3 class="mb-3">All Products</h3>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="max-height: 200px; object-fit: contain;" />
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                        <p><strong>Price: ₹@product.Price</strong></p>
+                        <a href="@Url.Action("AddToCart", "Cart", new { productId = product.ProductId })" class="btn btn-success mt-auto">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <a href="javascript:history.back()" class="btn btn-secondary mt-4">← Back</a>
+</div>

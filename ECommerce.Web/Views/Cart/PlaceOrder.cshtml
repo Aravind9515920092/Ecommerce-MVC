@@ -1,0 +1,66 @@
+﻿@model ECommerce.DTOs.Order.PlaceOrderDTO
+@{
+    ViewBag.Title = "Place Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">🛒 Review & Place Your Order</h2>
+
+    <div class="row">
+        <!-- Order Summary -->
+        <div class="col-md-6">
+            <h4>Your Cart</h4>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.Quantity</td>
+                            <td>₹@item.Price</td>
+                            <td>₹@(item.Price * item.Quantity)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h5 class="text-end">Total: ₹@Model.TotalAmount</h5>
+        </div>
+
+        <!-- Delivery Info -->
+        <div class="col-md-6">
+            <h4>Delivery Information</h4>
+            @using (Html.BeginForm("PlaceOrder", "Cart", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.CustomerName)
+                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", required = "required" })
+                </div>
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.Address)
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", required = "required" })
+                </div>
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.Contact)
+                    @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", required = "required", type = "tel" })
+                </div>
+                <div class="form-group mb-3">
+                    @Html.LabelFor(m => m.PaymentMethod)
+                    @Html.DropDownListFor(m => m.PaymentMethod, new SelectList(new[] { "Visa", "MasterCard", "UPI", "Cash On Delivery" }), "Select Payment Method", new { @class = "form-control", required = "required" })
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Place Order</button>
+            }
+        </div>
+    </div>
+</div>

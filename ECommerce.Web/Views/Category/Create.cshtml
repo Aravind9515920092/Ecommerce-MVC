@@ -1,0 +1,22 @@
+﻿
+@model ECommerce.DTOs.Category.CategoryDTO
+
+@{
+    ViewBag.Title = "Create Category";
+}
+
+<h2>Create Category</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+}
