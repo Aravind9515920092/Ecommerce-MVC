@@ -194,10 +194,6 @@
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ECommerce.Common\ECommerce.Common.csproj">
-      <Project>{f27c64a7-14e7-44b9-9df9-1226badd07d3}</Project>
-      <Name>ECommerce.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ECommerce.Data\ECommerce.Data.csproj">
       <Project>{8effce51-7f82-44ad-a31c-35dab5c94cfc}</Project>
       <Name>ECommerce.Data</Name>
